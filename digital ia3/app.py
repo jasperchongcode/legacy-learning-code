@@ -14,19 +14,21 @@ def encrypt(text):
     textEncrypted = hashlib.sha256(text_bytes).hexdigest()
     return textEncrypted
 
+
 # database name
 __DBNAME__ = "IA3.db"
 # api url
-url_text = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=AU&classificationName=music&dmaId=703&apikey=cCeZP8CSZLVdhoQD1ny8VXlGLyWbX3ts"
+url_text = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=AU&classificationName=music&dmaId=703&apikey="
 
 
 app = Flask(__name__)
 app.secret_key = 'x'
 
 # google maps api key
-Key = 'AIzaSyDzuFaLQm2fRi8KgjdBh72jiEqEgXziHqc'
+Key = ''
 
-def reset_database(__DBNAME__, url_text, admin_id): 
+
+def reset_database(__DBNAME__, url_text, admin_id):
     # download new data, sort through data, insert into database, update the last updated time
     # import the json and save to a file
     with urlopen(url_text) as url:
@@ -40,7 +42,7 @@ def reset_database(__DBNAME__, url_text, admin_id):
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
-    #fully clear the database
+    # fully clear the database
     cur.execute("""
                 DELETE FROM Venues
                 """)
@@ -67,20 +69,20 @@ def reset_database(__DBNAME__, url_text, admin_id):
             startDate = event["dates"]["start"]["localDate"]
             genre = event["classifications"][0]["genre"]["name"]
             subGenre = event["classifications"][0]["subGenre"]["name"]
-        
-            #insert event data into database
+
+            # insert event data into database
             cur.execute(""" INSERT INTO Events (eventName, eventUrl, startDate, genre, subGenre)
                             VALUES (?,?,?,?,?)""",
-                            (eventName, eventUrl, startDate, genre, subGenre)
-                            )
+                        (eventName, eventUrl, startDate, genre, subGenre)
+                        )
             conn.commit()
 
-            #get eventID
+            # get eventID
             cur.execute(""" SELECT eventID
                             FROM Events
                             WHERE eventName=? AND eventUrl=? AND startDate=? AND genre=? AND subGenre=?""",
-                            (eventName, eventUrl, startDate, genre, subGenre)
-                            )
+                        (eventName, eventUrl, startDate, genre, subGenre)
+                        )
             eventID = int(cur.fetchone()['eventID'])
             print(eventID)
 
@@ -91,7 +93,7 @@ def reset_database(__DBNAME__, url_text, admin_id):
                 longitude = venue["location"]["longitude"]
                 latitude = venue["location"]["latitude"]
 
-                #insert venue data into database
+                # insert venue data into database
 
                 cur.execute(""" INSERT INTO Venues (eventID, venueName, venueUrl, longitude, latitude)
                             VALUES (?,?,?,?,?)""",
@@ -104,7 +106,7 @@ def reset_database(__DBNAME__, url_text, admin_id):
                 attractionName = attraction["name"]
                 attractionUrl = attraction["url"]
 
-                #insert attraction data into database
+                # insert attraction data into database
                 cur.execute(""" INSERT INTO Attractions (eventID, attractionName, attractionUrl)
                             VALUES (?,?,?)""",
                             (eventID, attractionName, attractionUrl)
@@ -115,9 +117,9 @@ def reset_database(__DBNAME__, url_text, admin_id):
             for image in images:
                 imageUrl = image["url"]
                 imageWidth = image["width"]
-                imageHeight = image["height"] 
+                imageHeight = image["height"]
 
-                #insert image data into database
+                # insert image data into database
                 cur.execute(""" INSERT INTO Images (eventID, imageUrl, imageWidth, imageHeight)
                             VALUES (?,?,?,?)""",
                             (eventID, imageUrl, imageWidth, imageHeight)
@@ -126,7 +128,7 @@ def reset_database(__DBNAME__, url_text, admin_id):
 
     # change the last updated time
     conn.commit()
-    current_time=datetime.now().strftime("%Y/%m/%d %H:%M")
+    current_time = datetime.now().strftime("%Y/%m/%d %H:%M")
     cur.execute(""" INSERT INTO Data (updateTime, administratorID)
                     VALUES (?, ?)""",
                 (current_time, int(admin_id)))
@@ -136,20 +138,20 @@ def reset_database(__DBNAME__, url_text, admin_id):
 
 # Adapted from Mr Hurwood's PTapp
 
+
 @app.route('/')
-def index(): # get sql data to display all events
-     # CONNECT to database
+def index():  # get sql data to display all events
+    # CONNECT to database
     conn = sqlite3.connect(__DBNAME__)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
     cur.execute(
-            """ SELECT *
+        """ SELECT *
                 FROM Events""")
-    
+
     eventData = cur.fetchall()
     conn.close()
-
 
     return render_template('index.html', eventData=eventData)
 
@@ -163,7 +165,7 @@ def login():
         password = request.form['Password']
 
         # SQL injection protection
-        pUsername = username.replace("'","\\'")
+        pUsername = username.replace("'", "\\'")
 
         # one way encrypt password
         passwordEncrypted = encrypt(password)
@@ -173,10 +175,10 @@ def login():
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
 
-            # get Names and passwords from database
+        # get Names and passwords from database
         cur.execute(
             """ SELECT administratorID, username, passwordEncrypted FROM Administrators WHERE username = ?""",
-                (pUsername,),
+            (pUsername,),
         )
         results = cur.fetchall()
         conn.close()
@@ -186,13 +188,14 @@ def login():
             # IF login username and password match with database id and password
             if username == result["Username"] and passwordEncrypted == result["passwordEncrypted"]:
                 session["administratorID"] = result["administratorID"]
-                return redirect(url_for("administratorportal")) 
-            #error message:
+                return redirect(url_for("administratorportal"))
+            # error message:
         return render_template("login.html", msg="Invalid username or password")
-    
-    elif request.method == 'GET': #if button on home page is clicked
-         return render_template("login.html")
-    
+
+    elif request.method == 'GET':  # if button on home page is clicked
+        return render_template("login.html")
+
+
 @app.route('/logout')
 def logout():
     try:
@@ -202,13 +205,13 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/administratorportal', methods=['POST', 'GET']) 
+@app.route('/administratorportal', methods=['POST', 'GET'])
 def administratorportal():
     # Connect to the database
     conn = sqlite3.connect(__DBNAME__)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    
+
     cur.execute(
         """SELECT *
             FROM Data d, Administrators a
@@ -217,10 +220,9 @@ def administratorportal():
             """,)
     Data = cur.fetchall()
 
-
-
     conn.close()
     return render_template('administratorportal.html', Data=Data)
+
 
 @app.route("/updatedata", methods=["POST", "GET"])
 def updatedata():
@@ -230,16 +232,16 @@ def updatedata():
 
     # Reload the administrator portal with updated information
     return redirect(url_for("administratorportal"))
-    
+
+
 @app.route('/eventsearch', methods=['GET', 'POST'])
 def eventsearch():
     if request.method == "POST":
         searchTerm = request.form["searchTerm"]
         # sql injection protection
-        pSearchTerm = searchTerm.replace("'","\\'")
+        pSearchTerm = searchTerm.replace("'", "\\'")
         # this means the search term in any location for the like statement
         searchTerm_universal = "%"+pSearchTerm+"%"
-
 
         conn = sqlite3.connect(__DBNAME__)
         conn.row_factory = sqlite3.Row
@@ -250,12 +252,13 @@ def eventsearch():
             FROM Events e, Attractions a, Venues v
             WHERE (e.eventName LIKE ? OR e.genre LIKE ? OR e.subGenre LIKE ? OR e.startDate LIKE ?) OR 
             ((a.attractionName LIKE ?) AND e.eventID=a.eventID) OR ((v.venueName LIKE ?)AND e.eventID=v.eventID)""",
-            (searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal))
+                    (searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal, searchTerm_universal))
         Events = cur.fetchall()
-        
+
         conn.close()
 
         return render_template('eventsearch.html', Events=Events, searchTerm=searchTerm)
+
 
 @app.route('/event', methods=['GET', 'POST'])
 def event():
@@ -265,7 +268,7 @@ def event():
         conn = sqlite3.connect(__DBNAME__)
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-  
+
         cur.execute(
             """ SELECT *
                 FROM Events
@@ -293,6 +296,7 @@ def event():
         conn.close()
 
         return render_template('event.html', event=event, Venues=Venues, Attractions=Attractions, Images=Images, Key=Key)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
