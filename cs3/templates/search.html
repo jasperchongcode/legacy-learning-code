@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+{% if Year != "" %}
+    <p>The year requested is {{Year}}.</p>
+{% endif %}
+
+{% if Material != "" %}
+    <p>The material requested is {{Material}}.</p>
+{% endif %}
+
+<table class="table table-striped">
+    <! row_id,Title,Artist,Location,material,description,year,lat,long -->
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Material</th>
+        <th>Year</th>
+    </tr>
+    {% for row in art_data %}
+        <tr>
+            <td><a href="/object?id={{row[0]}}">{{row[1]}}</a></td>
+            <td>{{row[2]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[6]}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

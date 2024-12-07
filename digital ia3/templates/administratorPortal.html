@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Administrator Portal{% endblock %}
+
+{% block container %}
+<div class="grid-container">
+    <div class="item1 left topheader">Application Name: ADMINISTRATOR PORTAL</div>
+
+    <div class="item1 right">  
+        
+
+    <form action="logout">
+        <input type="submit" value="Log Out" class="btn btn-danger"/>
+    </form>
+</div><div style="clear: both;"></div>
+
+<div class="item2"><hr>
+    <div class="subheader" style="font-weight: bold;">UPDATE DATA</div>
+    
+    <form action="updatedata">
+        <input type="submit" value="UPDATE" class="btn btn-primary"/>
+    </form>
+</div> <div class="item3 right"><hr>
+    <div class="subheader" style="font-weight: bold;">Update Log</div>
+    <div>
+        <table class='table table-hover'>
+            <thead>
+                <th>#</th>
+                <th>Update Time</th>
+                <th>Username</th>
+            </thead>
+            {% for datum in Data %}
+            <tr>
+                <td>{{ datum["updateNumber"] }}</td>
+                <td>{{ datum["updateTime"] }}</td>
+                <td>{{ datum["username"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block container %}
+<div class="grid-container">
+    <div class="item1 left topheader">Application Name: "{{searchTerm}}"</div>
+    <div class="item1 right">
+        <form action="logout" method="GET">
+            <input type="submit" value="Back" class="btn btn-danger">
+        </form>
+    </div>
+    <div class="item4 center"><hr>
+        <div class="subheader" style="font-weight: bold;">ALL EVENTS</div>
+        <table class='table table-hover'>
+            <thead>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>genre</th>
+                <th>sub genre</th>
+            </thead>
+            {% for event in Events %}
+            <tr>
+                <td><a href="/event?id={{event['eventID']}}">{{ event["eventName"] }}</a></td>
+                <td>{{ event["startDate"] }}</td>
+                <td>{{ event["genre"] }}</td>
+                <td>{{ event["subGenre"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block container %}
+<div class="grid-container">
+    <div class="item1 left topheader">Application Name</div>
+    <div class="item1 right">
+        <form action="logout" method="GET">
+            <input type="submit" value="Back" class="btn btn-danger">
+        </form>
+    </div>
+    <div class="item4 center"><hr>
+        <div class="subheader" style="font-weight: bold;">ADMIN LOGIN</div>
+        <form action="login" method="post">
+            Username:<br>
+            <input type="text" name="Username"><br>
+            Password:<br>
+            <input type="password" name="Password"><br><br>
+            <input type="submit" value="Login" class="btn btn-primary">
+        </form>
+        <br>
+
+        <!-- error message -->
+        <div>
+            {{ msg }}
+        </div>
+        <br></div>
+
+
+</div>
+{% endblock %}

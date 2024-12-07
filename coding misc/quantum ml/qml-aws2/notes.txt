@@ -1,0 +1,11 @@
+https://pennylane.ai/qml/demos/tutorial_variational_classifier.html
+
+Install boto3
+https://www.youtube.com/watch?v=tW3HoYRnABs
+pip install amazon-braket-pennylane-plugin
+
+import pennylane as qml
+from pennylane import numpy as np
+
+dev = qml.device("braket.local.qubit", wires=2)
+

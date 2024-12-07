@@ -1,0 +1,51 @@
+0.	Code	Company	Market Cap	Share Price	.91	%_Change
+1.	ASX:BHP	BHP Group Limited	221.33B	43	.68	-0.02%
+2.	ASX:FMG	Fortescue Metals Group	62.6B	20	.475	+0.71%
+3.	ASX:RIO	Rio Tinto	39.23B	104	.64	-0.99%
+4.	ASX:NCM	Newcrest Mining Limited	22.35B	24	.825	-0.66%
+5.	ASX:JHX	James Hardie Industries plc	19.89B	44	.675	-1.16%
+6.	ASX:S32	South32 Limited	16.77B	3	.69	0.00%
+7.	ASX:PLS	Pilbara Minerals Limited	14.21B	4	.85	+2.54%
+8.	ASX:MIN	Mineral Resources Limited	12.32B	63	.95	+0.92%
+9.	ASX:NST	Northern Star Resources Limited	11.93B	10	.245	-1.11%
+10.	ASX:AMC	Amcor Limited	9.63B	14	.89	-0.47%
+11.	ASX:BSL	BlueScope Steel Limited	9.37B	21	.26	+3.40%
+12.	ASX:IGO	IGO Limited	9.35B	12	.465	+0.93%
+13.	ASX:AKE	Allkem Limited	8.49B	13	.88	+4.28%
+14.	ASX:ORI	Orica Limited	6.96B	15	.20	-0.46%
+15.	ASX:LYC	Lynas Rare Earths Limited	6.38B	6	.955	+1.83%
+16.	ASX:EVN	Evolution Mining Limited	6.17B	3	.345	-0.45%
+17.	ASX:IPL	Incitec Pivot Limited	5.69B	2	.935	+0.17%
+18.	ASX:LTR	Liontown Resources Limited	5.64B	2	.635	+2.93%
+19.	ASX:BLD	Boral Limited	5.53B	5	.035	+0.50%
+20.	ASX:ILU	Iluka Resources Limited	3.98B	9	.355	+0.16%
+21.	ASX:BKW	Brickworks Limited	3.9B	25	.53	-0.27%
+22.	ASX:AWC	Alumina Limited	3.86B	1	.315	-1.13%
+23.	ASX:ORA	Orora Group Limited	3.07B	3	.57	-1.65%
+24.	ASX:SGM	Sims Limited	2.95B	15	.36	+0.72%
+25.	ASX:CIA	Champion Iron Limited	2.84B	5	.58	+1.64%
+26.	ASX:SFR	Sandfire Resources Limited	2.76B	6	.025	-0.25%
+27.	ASX:AVZ	AVZ Minerals Limited	2.75B	0	.78	0.00%
+28.	ASX:CSR	CSR Limited	2.74B	5	.725	-0.09%
+29.	ASX:ZIM	Zimplats Holdings Limited	2.67B	24	.80	+0.12%
+30.	ASX:CRN	Coronado Global Resources Inc.	2.62B	1	.5575	-0.16%
+31.	ASX:NIC	Nickel Industries Limited	2.52B	0	.7475	+1.70%
+32.	ASX:SMR	Stanmore Resources Limited	2.51B	2	.825	+1.62%
+33.	ASX:DRR	Deterra Royalties Limited	2.38B	4	.57	+1.33%
+34.	ASX:PRU	Perseus Mining Limited	2.27B	1	.66	0.00%
+35.	ASX:DEG	De Grey Mining Limited	2.08B	1	.345	+0.75%
+36.	ASX:CHN	Chalice Mining Limited	1.93B	4	.935	-0.90%
+37.	ASX:NUF	Nufarm Limited	1.91B	4	.97	-1.00%
+38.	ASX:ABC	Adbri Limited	1.78B	2	.785	+2.01%
+39.	ASX:BGL	Bellevue Gold Limited	1.69B	1	.44	-3.68%
+40.	ASX:GOR	Gold Road Resources Limited	1.63B	1	.5125	-0.17%
+41.	ASX:GMD	Genesis Minerals Limited	1.51B	1	.495	+2.40%
+42.	ASX:CMM	Capricorn Metals Ltd	1.51B	4	.005	-0.12%
+43.	ASX:EMR	Emerald Resources NL	1.4B	2	.225	-5.32%
+44.	ASX:RMS	Ramelius Resources Limited	1.22B	1	.22	-0.81%
+45.	ASX:SYA	Sayona Mining Limited	1.18B	0	.1225	+6.52%
+46.	ASX:RRL	Regis Resources Limited	1.14B	1	.52	+0.66%
+47.	ASX:LLL	Leo Lithium Limited	1.13B	1	.14	0.00%
+48.	ASX:AZS	Azure Minerals Limited	1.07B	2	.74	0.00%
+49.	ASX:A4N	Alpha HPA Limited	1.07B	1	.115	-8.23%
+50.	ASX:VSL	Vulcan Steel Limited	1.02B	7	.66	-1.29%

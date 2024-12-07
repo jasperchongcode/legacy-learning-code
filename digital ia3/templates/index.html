@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block container %}
+<div class="grid-container">
+    <div class="item1 left topheader">Application Name</div>
+    <div class="item1 right">
+        <form action="login" method="GET">
+            <input type="submit" value="Admin Login" class="btn btn-secondary">
+        </form>
+    </div>
+    <div class="item2"><hr>
+        <div class="subheader" style="font-weight: bold;">SEARCH</div>
+        <div>Enter a search term:</div>
+        <form action="eventsearch" method="post">
+            <input type="text" name="searchTerm"><br><br>
+    
+            <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+    
+        </div>
+    <div class="item4 center"><hr>
+        <div class="subheader" style="font-weight: bold;">ALL EVENTS</div>
+        <table class='table table-hover'>
+            <thead>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>genre</th>
+                <th>sub genre</th>
+            </thead>
+            {% for event in eventData %}
+            <tr>
+                <td><a href="/event?id={{event['eventID']}}">{{ event["eventName"] }}</a></td>
+                <td>{{ event["startDate"] }}</td>
+                <td>{{ event["genre"] }}</td>
+                <td>{{ event["subGenre"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+
+    <div class="item3 right"><hr>
+        <div class="subheader" style="font-weight: bold;">ABOUT THIS SITE</div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <br><br>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+
+    </div>
+</div>
+{% endblock %}

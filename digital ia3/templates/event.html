@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Event{% endblock %}
+{% block container %}
+<!--todo display all the data, use tables for images and such-->
+<div class="grid-container"> 
+    <div class="item1 left topheader">
+        Application Name: {{event['eventName']}}
+    </div>
+    <div class="item1 right">
+        <form action="logout" method="GET">
+            <input type="submit" value="Home" class="btn btn-danger">
+        </form>
+    </div>
+
+    <div class="item2">
+        <div class="subheader" style="font-weight: bold;">GENERAL</div><hr>
+        <a href="{{event['eventUrl']}}" target="_blank">Book here</a>
+        <div>Start Date: {{event['startDate']}}</div>
+        <div>Genre: {{event['genre']}}</div>
+        <div>Subgenre: {{event['subGenre']}} </div><hr>
+       
+
+        <div class="subheader" style="font-weight: bold;">VENUE</div>
+        <br>
+        <table class='table table-hover'>
+            <thead>
+                <th>Venue Name</th>
+                <th>Map</th>
+
+            </thead>
+            {% for Venue in Venues%}
+            <tr>
+                <td>
+                    <a href="{{Venue['venueUrl']}}" target="_blank">{{ Venue["venueName"] }}</a>
+                </td>
+                <td>
+                    <iframe
+                    width="400"
+                    height="300"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key={{Key}}
+                        &q={{ Venue['Latitude']}},{{ Venue['Longitude']}}&maptype=satellite">
+                    </iframe>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+    <div class="item4 center">
+        <div class="subheader" style="font-weight: bold;">ATTRACTIONS</div>
+        <table class='table table-hover'>
+            <thead>
+                <th>Name</th>
+            </thead>
+            {% for Attraction in Attractions%}
+            <tr>
+                <td>
+                    <a href="{{Attraction['attractionUrl']}}" target="_blank">{{ Attraction["attractionName"] }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </div>
+    
+    <div class="item3 right">
+        <div class="subheader" style="font-weight: bold;">IMAGES</div>
+        <table class='table table-hover'>
+            <thead>
+                <th></th>
+            </thead>
+            {% for Image in Images%}
+            <tr>
+                <td>
+                    <img src="{{Image['imageUrl']}}" class="image">
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </div>
+
+</div>
+
+{% endblock %}

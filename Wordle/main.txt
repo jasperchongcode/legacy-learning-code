@@ -1,0 +1,389 @@
+import random
+from random import randint
+from termcolor import colored, cprint
+import pyperclip
+
+
+with open('words.txt') as wordsFile:
+    words = wordsFile.read().split()
+
+with open('guesswords.txt') as guessFile:
+    guessWords = guessFile.read().split()
+
+#Function for coloured boxes for twitter
+def flexFunction(word):
+    if word[0:1] == key[0:1]:
+        l1 = 'green'
+    elif word[0:1] in key:
+        l1 = 'yellow'
+    else:
+        l1 = 'grey'
+
+
+    if word[1:2] == key[1:2]:
+        l2 = 'green'
+    elif word[1:2] in key:
+        if word.count(word[1:2]) > key.count(word[1:2]) and word[0:1].count(word[1:2]) < key.count(word[1:2]):
+            l2 = 'yellow'
+        elif word.count(word[1:2]) > key.count(word[1:2]):
+            l2 = 'grey'
+        else:
+            l2 = 'yellow'
+    else:
+        l2 = 'grey'
+
+
+    if word[2:3] == key[2:3]:
+        l3 = 'green'
+    elif word[2:3] in key:
+        if word.count(word[2:3]) > key.count(word[2:3]) and word[0:2].count(word[2:3]) < key.count(word[2:3]):
+            l3 = 'yellow'
+        elif word.count(word[2:3]) > key.count(word[2:3]):
+            l3 = 'grey'
+        else:
+            l3 = 'yellow'
+    else:
+        l3 = 'grey'
+
+
+    if word[3:4] == key[3:4]:
+        l4 = 'green'
+    elif word[3:4] in key:
+        if word.count(word[3:4]) > key.count(word[3:4]) and word[0:3].count(word[3:4]) < key.count(word[3:4]):
+            l4 = 'yellow'
+        elif word.count(word[3:4]) > key.count(word[3:4]):
+            l4 = 'grey'
+        else:
+            l4 = 'yellow'
+    else:
+        l4 = 'grey'
+
+
+    if word[4:5] == key[4:5]:
+        l5 = 'green'
+    elif word[4:5] in key:
+        if word.count(word[4:5]) > key.count(word[4:5]) and word[0:4].count(word[4:5]) < key.count(word[4:5]):
+            l5 = 'yellow'
+        elif word.count(word[4:5]) > key.count(word[4:5]):
+            l5 = 'grey'
+        else:
+            l5 = 'yellow'
+    else:
+        l5 = 'grey'
+
+    if l1 == 'green':
+        l1 = '🟩'
+    elif l1 == 'yellow':
+        l1 = '🟨'
+    elif l1 == 'grey':
+        l1 = '⬜'
+
+    if l2 == 'green':
+        l2 = '🟩'
+    elif l2 == 'yellow':
+        l2 = '🟨'
+    elif l2 == 'grey':
+        l2 = '⬜'
+
+    if l3 == 'green':
+        l3 = '🟩'
+    elif l3 == 'yellow':
+        l3 = '🟨'
+    elif l3 == 'grey':
+        l3 = '⬜'
+
+    if l4 == 'green':
+        l4 = '🟩'
+    elif l4 == 'yellow':
+        l4 = '🟨'
+    elif l4 == 'grey':
+        l4 = '⬜'
+
+    if l5 == 'green':
+        l5 = '🟩'
+    elif l5 == 'yellow':
+        l5 = '🟨'
+    elif l5 == 'grey':
+        l5 = '⬜'
+
+    return (l1+l2+l3+l4+l5+'\n')
+
+
+alpha = {
+    "A": "white",
+    "B": "white",
+    "C": "white",
+    "D": "white",
+    "E": "white",
+    "F": "white",
+    "G": "white",
+    "H": "white",
+    "I": "white",
+    "J": "white",
+    "K": "white",
+    "L": "white",
+    "M": "white",
+    "N": "white",
+    "O": "white",
+    "P": "white",
+    "Q": "white",
+    "R": "white",
+    "S": "white",
+    "T": "white",
+    "U": "white",
+    "V": "white",
+    "W": "white",
+    "X": "white",
+    "Y": "white",
+    "Z": "white"
+}
+
+
+def checkGuess(word):
+    if word.lower() in guessWords:
+        return True
+
+#function for getting word colours
+def checkLoc(word):
+    if word[0:1] == key[0:1]:
+        l1 = 'green'
+    elif word[0:1] in key:
+        l1 = 'yellow'
+    else:
+        l1 = 'grey'
+
+
+    if word[1:2] == key[1:2]:
+        l2 = 'green'
+    elif word[1:2] in key:
+        if word.count(word[1:2]) > key.count(word[1:2]) and word[0:1].count(word[1:2]) < key.count(word[1:2]):
+            l2 = 'yellow'
+        elif word.count(word[1:2]) > key.count(word[1:2]):
+            l2 = 'grey'
+        else:
+            l2 = 'yellow'
+    else:
+        l2 = 'grey'
+
+
+    if word[2:3] == key[2:3]:
+        l3 = 'green'
+    elif word[2:3] in key:
+        # if count of a in word is greater than count of a in answer *and* count of a in previous letters is less than count of a in answer
+        if word.count(word[2:3]) > key.count(word[2:3]) and word[0:2].count(word[2:3]) < key.count(word[2:3]):
+            l3 = 'yellow'
+        elif word.count(word[2:3]) > key.count(word[2:3]):
+            l3 = 'grey'
+        else:
+            l3 = 'yellow'
+    else:
+        l3 = 'grey'
+
+
+    if word[3:4] == key[3:4]:
+        l4 = 'green'
+    elif word[3:4] in key:
+        # if count of a in word is greater than count of a in answer *and* count of a in previous letters is less than count of a in answer
+        if word.count(word[3:4]) > key.count(word[3:4]) and word[0:3].count(word[3:4]) < key.count(word[3:4]):
+            l4 = 'yellow'
+        elif word.count(word[3:4]) > key.count(word[3:4]):
+            l4 = 'grey'
+        else:
+            l4 = 'yellow'
+    else:
+        l4 = 'grey'
+
+
+    if word[4:5] == key[4:5]:
+        l5 = 'green'
+    elif word[4:5] in key:
+        # if count of a in word is greater than count of a in answer *and* count of a in previous letters is less than count of a in answer
+        if word.count(word[4:5]) > key.count(word[4:5]) and word[0:4].count(word[4:5]) < key.count(word[4:5]):
+            l5 = 'yellow'
+        elif word.count(word[4:5]) > key.count(word[4:5]):
+            l5 = 'grey'
+        else:
+            l5 = 'yellow'
+    else:
+        l5 = 'grey'
+
+    alpha[word[0:1]] = "grey"
+    alpha[word[1:2]] = 'grey'
+    alpha[word[2:3]] = 'grey'
+    alpha[word[3:4]] = 'grey'
+    alpha[word[4:5]] = 'grey'
+
+    #if the colour is not grey and the letter isnt already green
+    if l1 != 'grey' and alpha[word[0:1]] != 'green':
+        alpha[word[0:1]] = l1
+    if l2 != 'grey' and alpha[word[1:2]] != 'green':
+        alpha[word[1:2]] = l2
+    if l3 != 'grey' and alpha[word[2:3]] != 'green':
+        alpha[word[2:3]] = l3
+    if l4 != 'grey' and alpha[word[3:4]] != 'green':
+        alpha[word[3:4]] = l4
+    if l5 != 'grey' and alpha[word[4:5]] != 'green':
+        alpha[word[4:5]] = l5
+
+    return (colored(word[0:1], l1) + colored(word[1:2], l2) + colored(word[2:3], l3) + colored(word[3:4], l4) + colored(word[4:5], l5) + '\n')
+
+#update the printed keyboard with the dictionary
+def keyboardUpdate():
+    return (colored('Q', alpha['Q'])+colored('W', alpha['W'])+colored('E', alpha['E'])+colored('R', alpha['R'])+colored('T', alpha['T'])+colored('Y', alpha['Y'])+colored('U', alpha['U'])+colored('I', alpha['I'])+colored('O', alpha['O'])+colored('P', alpha['P'])+'\n'
+            +colored('A', alpha['A'])+colored('S', alpha['S'])+colored('D', alpha['D'])+colored('F', alpha['F'])+colored('G', alpha['G'])+colored('H', alpha['H'])+colored('J', alpha['J'])+colored('K', alpha['K'])+colored('L', alpha['L'])+'\n'
+            +' '+colored('Z', alpha['Z'])+colored('X', alpha['X'])+colored('C', alpha['C'])+colored('V', alpha['V'])+colored('B', alpha['B'])+colored('N', alpha['N'])+colored('M', alpha['M']) +'\n'
+            )
+
+
+def hint():
+    x = randint(1,5)
+    hint = key[(x-1):x]
+    if alpha[hint] != 'green':
+        alpha[hint] = 'yellow'
+    return hint
+
+#Bar graph !!1!!!!!!!
+def stat(num):
+    bar = ''
+    for i in range(num-1):
+        bar += '[]'
+    bar += '['+str(num)+']'
+    return bar
+
+#most common word
+def frequencyCount(List):
+    return max(set(List), key=List.count)
+
+#to add:
+#move all functions to different file
+#when it prints what colours do color it
+
+loop = 0
+val = 0
+tries = 0
+wins = 0
+correct = 0
+help=''
+hints = 0
+play = 'yes'
+played = 0
+saidWords = []
+
+a1 = 0
+a2 = 0
+a3 = 0
+a4 = 0
+a5 = 0
+a6 = 0
+print('\n')
+cprint('Welcome to Pythle', attrs=['bold'])
+print("grey means it hasn't been guessed, black means it has, yellow means right letter but wrong location, and green means right letter and right location")
+
+guessMem = ''
+#master loop
+while play == 'yes':
+    loop = 0
+    tries = 0
+    correct = 0
+    hints = 0
+    alpha = {
+        "A": "white","B": "white","C": "white","D": "white","E": "white","F": "white","G": "white","H": "white","I": "white","J": "white","K": "white","L": "white","M": "white","N": "white","O": "white","P": "white","Q": "white","R": "white","S": "white","T": "white","U": "white","V": "white","W": "white","X": "white","Y": "white","Z": "white"
+    }
+    guessMem=''
+    flexMem=''
+    key = random.choice(words)
+    key = key.upper()
+
+    print('\n','You can type',colored('"hint"','grey','on_yellow'), 'to get a random letter from the word (you may of already guessed it)')
+    print('or type',colored('"exit"','grey','on_yellow'), 'to quit')
+    while loop < 6:
+        val = 0
+        while val == 0:
+
+            print(guessMem)
+            print(keyboardUpdate())
+            guess = input('Guess: ').upper()
+            if checkGuess(guess) == True:
+               guessMem = guessMem + checkLoc(guess)
+               flexMem = flexMem + flexFunction(guess)
+               saidWords.append(guess)
+
+               if guess == key:
+                  print('Correct!','\n')
+                  wins += 1
+                  correct = 1
+                   # add to graphing variables
+                  loop = 6
+                  break
+               else:
+
+                   val = 1
+            elif guess == 'HINT':
+               help = hint()
+               hints +=1
+               print('\n',colored(help,alpha[help]),'\n')
+            elif guess == 'EXIT':
+                print('Thanks for playing!')
+                quit()
+            elif guess == 'DEV':
+                print(key)
+            else:
+                print(colored('Invalid','grey','on_red'),'\n')
+
+        tries += 1
+        print('You have',6-tries,'guesses left')
+        loop += 1
+    played += 1
+    print(guessMem)
+    print(keyboardUpdate())
+    if correct == 1:
+        print('Congratulations!')
+        print('Completed in', tries,'guesses with',hints,'hints')
+
+
+        if tries == 1:
+            a1 += 1
+        if tries == 2:
+            a2 += 1
+        if tries == 3:
+            a3 += 1
+        if tries == 4:
+            a4 += 1
+        if tries == 5:
+            a5 += 1
+        if tries == 6:
+            a6 += 1
+    else:
+        print('Unlucky')
+        print('The answer was',key)
+
+    #Statistics
+    print('Statistics:','\n''\n',
+          'Games played:',played,'\n',
+          'Wins:',wins,'\n',
+          'Losses:', (played-wins),'\n',
+          'Win rate:',str(round(((float(wins)/float(played))*100),2))+'%','\n',
+          'Most common word:', frequencyCount(saidWords),'\n',
+          '\n',
+          '1 Guess:', stat(a1), '\n',
+          '2 Guess:', stat(a2), '\n',
+          '3 Guess:', stat(a3), '\n',
+          '4 Guess:', stat(a4), '\n',
+          '5 Guess:', stat(a5), '\n',
+          '6 Guess:', stat(a6), '\n'
+          )
+
+    #Copy to clipboard
+    pyperclip.copy(flexMem)
+    if correct == 1:
+        ask = input('Share? (yes to copy to clipboard) ').lower()
+        if ask == 'yes':
+            flexMem = 'Pythle ' + str(played) + ' ' + str(tries)+'/6' + '\n' +'\n' +flexMem
+            pyperclip.copy(flexMem)
+            print('copied','\n')
+        else:
+            print('\n')
+    play = input('Would you like to play again (yes to play again): ')
+    play = play.lower()
+    if play != 'yes':
+        print('Thanks for playing!')
